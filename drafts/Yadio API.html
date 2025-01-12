@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://yadio.io/api.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Required meta tags -->
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google" content="notranslate">
+  <meta name="Description" content="Free-Market Exchange Rate API">
+
+  <!-- Twitter meta tags -->
+  <meta name="twitter:title" content="Free-Market Exchange Rate API">
+  <meta name="twitter:url" content="https://yadio.io/api.html">
+  <meta name="twitter:site" content="@yadio_io">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://yadio.io/social/logo_sq.png">
+  <meta name="twitter:description" content="Exchange rate calculated using only publicly available and verifiable data.">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./Yadio API_files/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="./Yadio API_files/all.min.css">
+  <link rel="stylesheet" href="./Yadio API_files/animate.min.css">
+  <link href="./Yadio API_files/style.css" rel="stylesheet">
+
+  <meta name="theme-color" content="#343a40">
+
+  <noscript>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Oops!</h4>
+      <p class="mb-0">For full functionality of this site it is necessary to enable JavaScript.</p>
+      <p class="mb-0">Para el funcionamiento de este sitio es necesario JavaScript.</p>
+      <hr>
+      <p class="mb-0">Here are the <a href="https://www.enable-javascript.com/" target="_blank" class="alert-link">
+          instructions how to enable JavaScript in your web browser.</a></p>
+      <p class="mb-0">Aquí estan las <a href="https://www.enable-javascript.com/es/" target="_blank" class="alert-link">
+          instrucciones para habilitar JavaScript en tu navegador.</a></p>
+    </div>
+  </noscript>
+
+  <title id="title">API</title>
+  <link rel="icon" href="https://yadio.io/img/logo-icon.png" type="image/png">
+  </head><body class="bg-dark"><nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <!-- Brand -->
+    <!-- Image and text -->
+    <a class="navbar-brand" href="https://yadio.io/">
+      <img src="./Yadio API_files/logo.png" height="30" class="d-inline-block align-center"><span class="px-1"></span>
+    </a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar"><ul class="navbar-nav mr-auto"><li class="nav-item "><a class="nav-link" href="https://yadio.io/grid.html" title="Global View"><i class="fas fa-globe fa-fw"></i><span id="navGlobal"> Global<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/simple.html" title="Local View"><i class="fas fa-map-pin fa-fw"></i><span id="navLocal"> Local<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/market.html" title="BTC P2P Market"><i class="fab fa-btc fa-fw"></i><span id="navMarket"> Market<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/calc.html" title="Calculator"><i class="fas fa-calculator fa-fw"></i><span id="navCalc"> Calc<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/today.html" title="24hr Charts"><i class="fas fa-chart-area fa-fw"></i><span id="navToday"> Today<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/charts.html" title="Historical Charts"><i class="fas fa-chart-bar fa-fw"></i><span id="navHistory"> History<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/comp.html" title="Comparison Charts"><i class="fas fa-not-equal fa-fw"></i><span id="navCompare"> Compare<span></span></span></a></li><li class="nav-item active"><a class="nav-link" href="https://yadio.io/api.html" title="API Docs"><i class="fas fa-cogs fa-fw"></i><span id="navAPI"> API<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://yadio.io/info.html" title="Information"><i class="far fa-question-circle fa-fw"></i><span id="navInfo"> Info<span></span></span></a></li><li class="nav-item "><a class="nav-link" href="https://status.yadio.io/" title="API Status"><i class="fas fa-check-circle fa-fw"></i><span id="navStatus"> Status<span></span></span></a></li></ul><span class="mr-2"><button id="langbtn" class="btn btn-sm btn-outline-secondary my-2 my-sm-0" onclick="ChangeLang()">Español</button></span></div>
+  </nav>
+
+
+
+  <div class="container text-light mt-4">
+    <p class="animated bounceInLeft lead"><span id="subtitle">Your source for free-market exchange rates <img src="./Yadio API_files/ex-arr.png" width="30" height="30" class="d-inline-block align-bottom"><i class="fas fa-globe fa-fw"></i></span></p>
+
+    <hr class="my-2">
+
+    <p id="lead" class="lead"><p>Our REST API allows you to seamlessly integrate accurate exchange rate data into your applications.</p><p><a href="https://status.yadio.io/" class="text-success"> <i class="fas fa-check-circle"></i> API Status</a></p><p>If you have questions or special requests send us a message <a href="mailto:info+api@yadio.io?subject=API" class="text-info"><i class="far fa-envelope"></i></a></p></p>
+
+    <div class="accordion my-4" id="accordionFAQ">
+      <div id="faqCards">
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="FAQ0" data-toggle="collapse" data-target="#collapseFAQ0">Rate Limits</span>
+      </h6>
+    </div>
+    <div id="collapseFAQ0" class="collapse" data-parent="#accordionFAQ">
+      <div class="card-body border-0">
+        <p id="FAQ0_txt" class="text-left">Maximum requests per minute: 100</p>
+      </div>
+    </div>
+  </div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="FAQ1" data-toggle="collapse" data-target="#collapseFAQ1">Base Endpoint</span>
+      </h6>
+    </div>
+    <div id="collapseFAQ1" class="collapse" data-parent="#accordionFAQ">
+      <div class="card-body border-0">
+        <p id="FAQ1_txt" class="text-left">https://api.yadio.io</p>
+      </div>
+    </div>
+  </div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="FAQ2" data-toggle="collapse" data-target="#collapseFAQ2">Status Codes</span>
+      </h6>
+    </div>
+    <div id="collapseFAQ2" class="collapse" data-parent="#accordionFAQ">
+      <div class="card-body border-0">
+        <p id="FAQ2_txt" class="text-left">200: OK<br>400: invalid request<br>429: too many requests<br>500: generic internal server error</p>
+      </div>
+    </div>
+  </div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="FAQ3" data-toggle="collapse" data-target="#collapseFAQ3">Timestamp Format</span>
+      </h6>
+    </div>
+    <div id="collapseFAQ3" class="collapse" data-parent="#accordionFAQ">
+      <div class="card-body border-0">
+        <p id="FAQ3_txt" class="text-left">Unix time in milliseconds</p>
+      </div>
+    </div>
+  </div>
+  </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div id="accordion_title" class="mt-4 h4"><span>Endpoints</span></div>
+
+    <div class="collapse show" id="accordion">
+      <div id="endpointCards">
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API0" data-toggle="collapse" data-target="#collapseAPI0">/exrates/{currency}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI0" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API0_txt" class="text-left"><p>Returns exchange rates</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">currency:</span> 3-letter currency code (optional. default=USD)</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE0" data-toggle="collapse" data-target="#collapseSample0" onclick="fetchResponse(&#39;https://api.yadio.io/exrates/USD&#39;, &#39;#ResponseSample0&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample0" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample0"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux0" data-toggle="collapse" data-target="#collapseUsageLinux0"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux0" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux0"># get exchange rates base: USD<br>curl -X GET "https://api.yadio.io/exrates/USD"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS0" data-toggle="collapse" data-target="#collapseUsage0"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage0" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS0">/* get exchange rates base: USD */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/exrates/USD'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python0" data-toggle="collapse" data-target="#collapseUsagePython0"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython0" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python0"># get exchange rates base: USD<br><br>import requests <br>url = 'https://api.yadio.io/exrates/USD'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API1" data-toggle="collapse" data-target="#collapseAPI1">/convert/{amount}/{from}/{to}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI1" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API1_txt" class="text-left"><p>Converts amount from one currency to another</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">amount:</span> amount to be converted (required)<br><span class="text-info">from:</span> 3-letter currency code (required)<br><span class="text-info">to:</span> 3-letter currency code (required)</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE1" data-toggle="collapse" data-target="#collapseSample1" onclick="fetchResponse(&#39;https://api.yadio.io/convert/100/USD/ARS&#39;, &#39;#ResponseSample1&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample1" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample1"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux1" data-toggle="collapse" data-target="#collapseUsageLinux1"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux1" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux1"># convert 100 USD to ARS<br>curl -X GET "https://api.yadio.io/convert/100/USD/ARS"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS1" data-toggle="collapse" data-target="#collapseUsage1"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage1" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS1">/* convert 100 USD to ARS */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/convert/100/USD/ARS'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python1" data-toggle="collapse" data-target="#collapseUsagePython1"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython1" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python1"># convert 100 USD to ARS<br><br>import requests <br>url = 'https://api.yadio.io/convert/100/USD/ARS'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API2" data-toggle="collapse" data-target="#collapseAPI2">/rate/{currency0}/{currency1}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI2" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API2_txt" class="text-left"><p>Returns exchange rate for specified currency pair</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">currency0:</span> 3-letter currency code<br><span class="text-info">currency1:</span> 3-letter currency code</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE2" data-toggle="collapse" data-target="#collapseSample2" onclick="fetchResponse(&#39;https://api.yadio.io/rate/ARS/USD&#39;, &#39;#ResponseSample2&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample2" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample2"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux2" data-toggle="collapse" data-target="#collapseUsageLinux2"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux2" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux2"># get exchange rate ARS/USD<br>curl -X GET "https://api.yadio.io/rate/ARS/USD"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS2" data-toggle="collapse" data-target="#collapseUsage2"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage2" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS2">/* get exchange rate ARS/USD */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/rate/ARS/USD'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python2" data-toggle="collapse" data-target="#collapseUsagePython2"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython2" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python2"># get exchange rate ARS/USD<br><br>import requests <br>url = 'https://api.yadio.io/rate/ARS/USD'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API3" data-toggle="collapse" data-target="#collapseAPI3">/currencies</span>
+      </h6>
+    </div>
+    <div id="collapseAPI3" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API3_txt" class="text-left"><p>Lists available currencies</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br></p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE3" data-toggle="collapse" data-target="#collapseSample3" onclick="fetchResponse(&#39;https://api.yadio.io/currencies&#39;, &#39;#ResponseSample3&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample3" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample3"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux3" data-toggle="collapse" data-target="#collapseUsageLinux3"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux3" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux3"># get available currencies<br>curl -X GET "https://api.yadio.io/currencies"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS3" data-toggle="collapse" data-target="#collapseUsage3"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage3" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS3">/* get available currencies */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/currencies'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python3" data-toggle="collapse" data-target="#collapseUsagePython3"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython3" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python3"># get available currencies<br><br>import requests <br>url = 'https://api.yadio.io/currencies'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link collapsed" id="API4" data-toggle="collapse" data-target="#collapseAPI4" aria-expanded="false">/exchanges</span>
+      </h6>
+    </div>
+    <div id="collapseAPI4" class="collapse" data-parent="#accordion" style="">
+      <div class="card-body border-0">
+        <p id="API4_txt" class="text-left"><p>Lists active exchanges</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br></p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE4" data-toggle="collapse" data-target="#collapseSample4" onclick="fetchResponse(&#39;https://api.yadio.io/exchanges&#39;, &#39;#ResponseSample4&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample4" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample4"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux4" data-toggle="collapse" data-target="#collapseUsageLinux4"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux4" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux4"># get active exchanges<br>curl -X GET "https://api.yadio.io/exchanges"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS4" data-toggle="collapse" data-target="#collapseUsage4"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage4" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS4">/* get active exchanges */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/exchanges'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python4" data-toggle="collapse" data-target="#collapseUsagePython4"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython4" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python4"># get active exchanges<br><br>import requests <br>url = 'https://api.yadio.io/exchanges'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API5" data-toggle="collapse" data-target="#collapseAPI5">/today/{range}/{currency}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI5" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API5_txt" class="text-left"><p>Returns rate information for specified currency and period of hours</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">range:</span> number of hours to include from 1 to 24 (required)<br><span class="text-info">currency:</span> 3-letter currency code</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE5" data-toggle="collapse" data-target="#collapseSample5" onclick="fetchResponse(&#39;https://api.yadio.io/today/1/ARS&#39;, &#39;#ResponseSample5&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample5" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample5"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux5" data-toggle="collapse" data-target="#collapseUsageLinux5"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux5" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux5"># get ARS rate and volume info for last hour<br>curl -X GET "https://api.yadio.io/today/1/ARS"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS5" data-toggle="collapse" data-target="#collapseUsage5"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage5" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS5">/* get ARS rate and volume info for last hour */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/today/1/ARS'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python5" data-toggle="collapse" data-target="#collapseUsagePython5"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython5" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python5"># get ARS rate and volume info for last hour<br><br>import requests <br>url = 'https://api.yadio.io/today/1/ARS'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API6" data-toggle="collapse" data-target="#collapseAPI6">/hist/{range}/{currency}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI6" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API6_txt" class="text-left"><p>Returns historical rate information</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">range:</span> number of days to include from 1 to 365 (required)<br><span class="text-info">currency:</span> 3-letter currency code</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE6" data-toggle="collapse" data-target="#collapseSample6" onclick="fetchResponse(&#39;https://api.yadio.io/hist/2/ARS&#39;, &#39;#ResponseSample6&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample6" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample6"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux6" data-toggle="collapse" data-target="#collapseUsageLinux6"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux6" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux6"># get ARS rate and volume info for last 2 days<br>curl -X GET "https://api.yadio.io/hist/2/ARS"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS6" data-toggle="collapse" data-target="#collapseUsage6"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage6" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS6">/* get ARS rate and volume info for last 2 days */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/hist/2/ARS'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python6" data-toggle="collapse" data-target="#collapseUsagePython6"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython6" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python6"># get ARS rate and volume info for last 2 days<br><br>import requests <br>url = 'https://api.yadio.io/hist/2/ARS'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API7" data-toggle="collapse" data-target="#collapseAPI7">/compare/{range}/{currency}</span>
+      </h6>
+    </div>
+    <div id="collapseAPI7" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API7_txt" class="text-left"><p>Returns comparison information for specified currency and period of days</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br><span class="text-info">range:</span> number of days to include from 1 to 365 (required)<br><span class="text-info">currency:</span> 3-letter currency code</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE7" data-toggle="collapse" data-target="#collapseSample7" onclick="fetchResponse(&#39;https://api.yadio.io/compare/2/ARS&#39;, &#39;#ResponseSample7&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample7" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample7"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux7" data-toggle="collapse" data-target="#collapseUsageLinux7"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux7" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux7"># get ARS comparison info for last 2 days<br>curl -X GET "https://api.yadio.io/compare/2/ARS"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS7" data-toggle="collapse" data-target="#collapseUsage7"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage7" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS7">/* get ARS comparison info for last 2 days */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/compare/2/ARS'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python7" data-toggle="collapse" data-target="#collapseUsagePython7"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython7" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python7"># get ARS comparison info for last 2 days<br><br>import requests <br>url = 'https://api.yadio.io/compare/2/ARS'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API8" data-toggle="collapse" data-target="#collapseAPI8">/market/ads</span>
+      </h6>
+    </div>
+    <div id="collapseAPI8" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API8_txt" class="text-left"><p>Returns P2P market ads</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br>Query Parameters: currency, side, limit<br><span class="text-info">currency:</span> 3-letter currency code (required)<br><span class="text-info">side:</span> buy or sell (required)<br><span class="text-info">limit:</span> max number of ads (optional. default=20)</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE8" data-toggle="collapse" data-target="#collapseSample8" onclick="fetchResponse(&#39;https://api.yadio.io/market/ads?currency=ARS&amp;side=buy&amp;limit=5&#39;, &#39;#ResponseSample8&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample8" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample8"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux8" data-toggle="collapse" data-target="#collapseUsageLinux8"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux8" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux8"># get ads currency=ARS side=buy limit=5<br>curl -X GET "https://api.yadio.io/market/ads?currency=ARS&amp;side=buy&amp;limit=5"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS8" data-toggle="collapse" data-target="#collapseUsage8"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage8" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS8">/* get ads currency=ARS side=buy limit=5 */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/market/ads?currency=ARS&amp;side=buy&amp;limit=5'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python8" data-toggle="collapse" data-target="#collapseUsagePython8"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython8" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python8"># get ads currency=ARS side=buy limit=5<br><br>import requests <br>url = 'https://api.yadio.io/market/ads?currency=ARS&amp;side=buy&amp;limit=5'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API9" data-toggle="collapse" data-target="#collapseAPI9">/market/stats</span>
+      </h6>
+    </div>
+    <div id="collapseAPI9" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API9_txt" class="text-left"><p>Returns P2P market statistics</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br>Query Parameters: currency, side<br><span class="text-info">currency:</span> 3-letter currency code (required)<br><span class="text-info">side:</span> buy or sell (required)</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE9" data-toggle="collapse" data-target="#collapseSample9" onclick="fetchResponse(&#39;https://api.yadio.io/market/stats?currency=ARS&amp;side=buy&#39;, &#39;#ResponseSample9&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample9" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample9"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux9" data-toggle="collapse" data-target="#collapseUsageLinux9"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux9" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux9"># get market stats currency=ARS side=buy<br>curl -X GET "https://api.yadio.io/market/stats?currency=ARS&amp;side=buy"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS9" data-toggle="collapse" data-target="#collapseUsage9"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage9" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS9">/* get market stats currency=ARS side=buy */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/market/stats?currency=ARS&amp;side=buy'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python9" data-toggle="collapse" data-target="#collapseUsagePython9"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython9" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python9"># get market stats currency=ARS side=buy<br><br>import requests <br>url = 'https://api.yadio.io/market/stats?currency=ARS&amp;side=buy'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  
+    
+    <div class="card bg-dark border border-secondary mt-4">
+    <div class="card-header border-0">
+      <h6 class="mb-0 text-info">
+        <span class="text-info stretched-link" id="API10" data-toggle="collapse" data-target="#collapseAPI10">/ping</span>
+      </h6>
+    </div>
+    <div id="collapseAPI10" class="collapse" data-parent="#accordion">
+      <div class="card-body border-0">
+        <p id="API10_txt" class="text-left"><p>Checks server status</p>Base Endpoint: https://api.yadio.io<br>Method: GET<br>Permissions: public<br>Response: application/json<br>CORS: enabled<br></p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="SAMPLE10" data-toggle="collapse" data-target="#collapseSample10" onclick="fetchResponse(&#39;https://api.yadio.io/ping&#39;, &#39;#ResponseSample10&#39;)"><span class="text-secondary small">Real-Time API Query: <span class="text-success"><i class="fas fa-play fa-fw"></i></span></span> </a>
+    </h6>
+  </div>
+  <div id="collapseSample10" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="ResponseSample10"></span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Linux10" data-toggle="collapse" data-target="#collapseUsageLinux10"><span class="text-secondary small">Usage Example: <i class="fab fa-linux fa-fw"></i>cURL</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsageLinux10" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Linux10"># get server status<br>curl -X GET "https://api.yadio.io/ping"</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_JS10" data-toggle="collapse" data-target="#collapseUsage10"><span class="text-secondary small">Usage Example: <i class="fab fa-js fa-fw"></i>JavaScript</span></a>
+    </h6>
+  </div>
+  <div id="collapseUsage10" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_JS10">/* get server status */<br>
+const axios = require('axios')
+var url = 'https://api.yadio.io/ping'
+axios
+  .get(url)
+  .then(res =&gt; {
+    console.log(res.data)
+  })</span></code></pre>
+    </div>
+  </div>
+</div>
+    
+  <div class="card bg-dark border-0">
+  <div class="card-header border-0">
+    <h6 class="mb-0">
+      <a id="USAGE_Python10" data-toggle="collapse" data-target="#collapseUsagePython10"><span class="text-secondary small">Usage Example: <i class="fab fa-python fa-fw"></i>Python </span></a>
+    </h6>
+  </div>
+  <div id="collapseUsagePython10" class="collapse" data-parent="#accordion">
+    <div class="card-body border-0">
+        <pre><code class="text-success"><span id="SampleCode_Python10"># get server status<br><br>import requests <br>url = 'https://api.yadio.io/ping'<br>response = requests.get(url)<br>print(response.json())</span></code></pre>
+    </div>
+  </div>
+</div>
+  </div>
+    </div> <!-- end accordion -->
+
+  </div>
+
+  <footer id="Footer" class="footer bg-dark"><div class="container"><div class="text-muted float-left"><span class="text-muted"><i class="far fa-copyright"></i> yadio.io</span> <a class="text-muted social" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/yadio_io"><i class="fa-brands fa-x-twitter"></i></a> <a class="text-muted social" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/yadio_io"><i class="fab fa-instagram"></i></a> <a id="mail" class="text-muted social" title="E-Mail" href="mailto:info+web@yadio.io?subject=website" target="_blank"><i class="far fa-envelope"></i></a> </div><div class="float-right"><a class="text-muted" title="API Status" href="https://status.yadio.io/"> All services are online <span class="text-success" id="api_status"><i class="fas fa-check-circle"></i></span></a></div></div></footer>
+
+  <!-- Bootstrap bundle JS -->
+  <script src="./Yadio API_files/jquery.slim.min.js.download" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="./Yadio API_files/bootstrap.bundle.min.js.download" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+  </script>
+
+  <script src="./Yadio API_files/utilsg.min.js.download"></script>
+  <script src="./Yadio API_files/apix.min.js.download"></script>
+  <script defer="" data-domain="yadio.io" src="./Yadio API_files/plausible.js.download"></script>
+
+
+
+</body></html>

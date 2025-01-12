@@ -1,0 +1,54 @@
+{
+    "currency": "COP",
+    "asset": "BTC",
+    "side": "sell",
+    "stats": {
+        "mean": 409135388.67,
+        "median": 406479154.89,
+        "sigma": 43857494.62,
+        "total": 239,
+        "ads_count": {
+            "LocalBitcoins": 0,
+            "Hodl Hodl": 0,
+            "Paxful": 109,
+            "LocalCoinSwap": 10,
+            "Binance P2P": 73,
+            "LocalCryptos": 0,
+            "Bitzlato": 0,
+            "Remitano": 0,
+            "Bisq": 0,
+            "OKX P2P": 5,
+            "KuCoin P2P": 6,
+            "HTX P2P": 1,
+            "AgoraDesk": 0,
+            "Bybit P2P": 15,
+            "Noones": 5,
+            "Bitpapa": 0,
+            "Pexpay": 0,
+            "BitValve": 0,
+            "Totalcoin": 0,
+            "Bitfinex P2P": 1,
+            "Lnp2pBot": 12,
+            "El Dorado P2P": 0,
+            "CommEx": 0,
+            "RoboSats": 1,
+            "Bitget P2P": 0,
+            "P2PCoins": 1
+        },
+        "y_score_freq": {
+            "1": 4,
+            "2": 15,
+            "3": 200,
+            "4": 5,
+            "5": 15
+        },
+        "top_payment_methods": {
+            "Any Bank": 78,
+            "Nequi": 47,
+            "Bancolombia": 46,
+            "PayPal": 10,
+            "Western Union": 10
+        }
+    },
+    "timestamp": 1733450042297
+}
