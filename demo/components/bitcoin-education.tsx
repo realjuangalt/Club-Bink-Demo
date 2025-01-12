@@ -16,12 +16,13 @@ const educationCards = [
   'howToStore',
   'isBitcoinLegal',
   'howVolatile',
-  'howToBuy'
+  'howToBuy',
+  'buyFromFriend'
 ]
 
 export default function BitcoinEducation() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const [email, setEmail] = useState("")
   const { language } = useLanguage()
   const { t } = useTranslation()
@@ -40,15 +41,12 @@ export default function BitcoinEducation() {
       const containerTop = container.getBoundingClientRect().top
       const windowHeight = window.innerHeight
       const scrollPosition = window.scrollY
-      
+
       if (containerTop <= windowHeight) {
         const adjustedScroll = Math.max(0, scrollPosition - (container.offsetTop - windowHeight))
-        const cardHeight = windowHeight
-        const newIndex = Math.min(
-          Math.max(Math.floor(adjustedScroll / cardHeight), 0),
-          educationCards.length - 1
-        )
-        setActiveIndex(newIndex)
+        const totalScrollHeight = container.scrollHeight - windowHeight
+        const progress = Math.min(adjustedScroll / totalScrollHeight, 1)
+        setScrollProgress(progress)
       }
     }
 
@@ -62,60 +60,51 @@ export default function BitcoinEducation() {
       ref={containerRef}
       className="relative mt-0 px-6"
       style={{ 
-        height: `${educationCards.length * 100}vh`,
+        height: `${(educationCards.length) * 100}vh`,
       }}
     >
       <div className="sticky top-0 h-screen flex items-start justify-center overflow-hidden pt-6">
         <div className="relative w-full max-w-6xl mx-auto">
           {educationCards.map((card, index) => {
-            const isActive = index === activeIndex
-            const isPast = index < activeIndex
-            const isFuture = index > activeIndex
+            const cardProgress = (scrollProgress * educationCards.length) - index
+            const yOffset = Math.max(0, Math.min(1, cardProgress)) * 100
             
             return (
               <div
                 key={index}
-                className="absolute w-full transition-all duration-700 ease-out"
+                className="absolute w-full transition-transform duration-300 ease-out"
                 style={{
-                  opacity: isPast ? 0 : 1,
-                  transform: `perspective(1000px) translateY(${
-                    isActive ? '0px' : 
-                    isFuture ? '100vh' : 
-                    '20px'
-                  }) scale(${
-                    isActive ? 1 :
-                    isFuture ? 1 : 
-                    0.9
-                  })`,
-                  zIndex: educationCards.length - index,
-                  pointerEvents: isActive ? 'auto' : 'none',
-                  visibility: isPast ? 'hidden' : 'visible',
+                  transform: `translateY(${100 - yOffset}vh)`,
+                  zIndex: index,
                 }}
               >
-                <Card className="bg-[#242424] border-gray-800 overflow-hidden shadow-lg max-w-4xl mx-auto">
+                <Card className="bg-neutral-800 border-neutral-700 overflow-hidden shadow-lg max-w-4xl mx-auto">
                   <div className="flex flex-col md:flex-row gap-12 p-6 md:p-12 min-h-[60vh]">
                     <div className="flex-1 flex flex-col justify-center">
-                      <h2 className="text-4xl font-bold text-white mb-6">{t(card)}</h2>
-                      <p className="text-gray-400 text-xl leading-relaxed">{t(`${card}Content`)}</p>
+                      <h2 className="text-4xl font-bold text-neutral-100 mb-6">{t(card)}</h2>
+                      <p className="text-neutral-300 text-xl leading-relaxed">{t(`${card}Content`)}</p>
                       {index === educationCards.length - 1 && (
                         <form onSubmit={handleSubmit} className="mt-6">
-                          <div className="flex gap-4">
+                          <div className="flex flex-col sm:flex-row gap-4">
                             <Input
                               type="email"
                               placeholder={t('enterEmail')}
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="bg-[#2A2A2A] border-gray-700 text-white"
+                              className="bg-neutral-700 border-gray-700 text-neutral-100 flex-grow"
                               required
                             />
-                            <Button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white">
+                            <Button 
+                              type="submit" 
+                              className="bg-primary-300 hover:bg-primary-400 text-neutral-100 w-full sm:w-auto"
+                            >
                               {t('signUp')}
                             </Button>
                           </div>
                         </form>
                       )}
                     </div>
-                    <div className="w-full md:w-2/5 bg-[#2A2A2A] rounded-lg p-6 flex items-center justify-center">
+                    <div className="w-full md:w-2/5 bg-neutral-700 rounded-lg p-6 flex items-center justify-center">
                       <Image
                         src={`/bitcoin-education-${index + 1}.png`}
                         alt={`Illustration for ${t(card)}`}

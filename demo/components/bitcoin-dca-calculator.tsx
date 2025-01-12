@@ -78,8 +78,8 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
     setMode(mode);
   }, [mode, setMode]);
 
-  if (isLoading) return <div className="text-white">{t('loading')}</div>
-  if (error) return <div className="text-white">{t('error', { message: error })}</div>
+  if (isLoading) return <div className="text-neutral-100">{t('loading')}</div>
+  if (error) return <div className="text-neutral-100">{t('error', { message: error })}</div>
 
   const totalInvested = weeklyAmount * Math.floor(chartData.length / frequency)
   const currentValue = dcaResults[dcaResults.length - 1]?.portfolioValueUsd || 0
@@ -87,16 +87,16 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
   const percentageGain = ((currentValue - totalInvested) / totalInvested) * 100
 
   return (
-    <div className="dark bg-[#1C1C1C]">
-      <div className="absolute top-4 right-4 z-10 flex gap-2">
-        <ModeToggle mode={mode} setMode={setLocalMode} />
-        <LanguageSwitcher />
-      </div>
+    <div className="dark bg-neutral-900">
       <div className="px-6 pt-6">
-        <Card className="w-full max-w-4xl mx-auto bg-[#242424] border-gray-800 mt-16">
+        <Card className="w-full max-w-4xl mx-auto bg-neutral-800 border-neutral-700 mt-8 relative">
           <CardHeader>
-            <CardTitle className="text-white">{t('title')}</CardTitle>
-            <CardDescription className="text-gray-400">
+            <div className="absolute top-4 right-4 flex gap-2">
+              <ModeToggle mode={mode} setMode={setLocalMode} />
+              <LanguageSwitcher />
+            </div>
+            <CardTitle className="text-neutral-100">{t('title')}</CardTitle>
+            <CardDescription className="text-neutral-300">
               {t('description', { 
                 amount: formatCurrency(weeklyAmount), 
                 frequency: frequency, 
@@ -119,7 +119,7 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                   </div>
                   <div className="grid gap-4 w-full">
                     <div>
-                      <Label htmlFor="weeklyAmount" className="text-gray-300">{t('weeklyInvestment')}</Label>
+                      <Label htmlFor="weeklyAmount" className="text-neutral-200">{t('weeklyInvestment')}</Label>
                       <Input
                         id="weeklyAmount"
                         type="number"
@@ -131,11 +131,11 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                         }}
                         min={10}
                         step={10}
-                        className="bg-[#2A2A2A] border-gray-700 text-white"
+                        className="bg-neutral-700 border-neutral-700 text-neutral-100"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="frequency" className="text-gray-300">{t('investmentFrequency')}</Label>
+                      <Label htmlFor="frequency" className="text-neutral-200">{t('investmentFrequency')}</Label>
                       <Input
                         id="frequency"
                         type="number"
@@ -143,7 +143,7 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                         onChange={handleFrequencyChange}
                         min={1}
                         max={52}
-                        className="bg-[#2A2A2A] border-gray-700 text-white"
+                        className="bg-neutral-700 border-neutral-700 text-neutral-100"
                       />
                     </div>
                   </div>
@@ -191,8 +191,8 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                               padding: '12px'
                             }}
                             itemStyle={(entry: any) => ({
-                              color: entry.dataKey === 'price' ? '#ff9900' : 
-                                     entry.dataKey === 'portfolioValue' ? '#00ff00' : '#0066cc'
+                              color: entry.dataKey === 'price' ? '#FFA500' : 
+                                     entry.dataKey === 'portfolioValue' ? '#00FF00' : '#0066cc'
                             })}
                             formatter={(value: number, name: string) => [
                               new Intl.NumberFormat(language, {
@@ -220,7 +220,7 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                             yAxisId="left" 
                             type="monotone" 
                             dataKey="price" 
-                            stroke="#ff9900" 
+                            stroke="#FFA500" 
                             name={t('btcPrice')}
                             dot={false}
                           />
@@ -228,7 +228,7 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
                             yAxisId="right" 
                             type="monotone" 
                             dataKey="portfolioValue" 
-                            stroke="#00ff00" 
+                            stroke="#00FF00" 
                             name={t('portfolioValue')}
                             dot={false}
                           />
@@ -248,21 +248,21 @@ export default function BitcoinDCACalculator({ initialMode, setMode }: BitcoinDC
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 bg-[#2A2A2A] border border-gray-800 rounded-lg">
-                  <h4 className="text-sm font-medium text-gray-400 mb-2">{t('totalInvested')}</h4>
-                  <p className="text-xl md:text-2xl font-bold text-white">{formatCurrency(totalInvested)}</p>
+                <div className="p-4 bg-neutral-700 border border-neutral-700 rounded-lg">
+                  <h4 className="text-sm font-medium text-neutral-300 mb-2">{t('totalInvested')}</h4>
+                  <p className="text-xl md:text-2xl font-bold text-neutral-100">{formatCurrency(totalInvested)}</p>
                 </div>
-                <div className="p-4 bg-[#2A2A2A] border border-gray-800 rounded-lg">
-                  <h4 className="text-sm font-medium text-gray-400 mb-2">{t('currentValue')}</h4>
-                  <p className="text-xl md:text-2xl font-bold text-white">{formatCurrency(currentValue)}</p>
+                <div className="p-4 bg-neutral-700 border border-neutral-700 rounded-lg">
+                  <h4 className="text-sm font-medium text-neutral-300 mb-2">{t('currentValue')}</h4>
+                  <p className="text-xl md:text-2xl font-bold text-neutral-100">{formatCurrency(currentValue)}</p>
                 </div>
-                <div className="p-4 bg-[#2A2A2A] border border-gray-800 rounded-lg">
-                  <h4 className="text-sm font-medium text-gray-400 mb-2">{t('totalBTC')}</h4>
-                  <p className="text-xl md:text-2xl font-bold text-white">{totalBtc.toFixed(8)} BTC</p>
+                <div className="p-4 bg-neutral-700 border border-neutral-700 rounded-lg">
+                  <h4 className="text-sm font-medium text-neutral-300 mb-2">{t('totalBTC')}</h4>
+                  <p className="text-xl md:text-2xl font-bold text-neutral-100">{totalBtc.toFixed(8)} BTC</p>
                 </div>
-                <div className="p-4 bg-[#2A2A2A] border border-gray-800 rounded-lg">
-                  <h4 className="text-sm font-medium text-gray-400 mb-2">{t('return')}</h4>
-                  <p className="text-xl md:text-2xl font-bold" style={{ color: percentageGain >= 0 ? '#00ff00' : '#ff4444' }}>
+                <div className="p-4 bg-neutral-700 border border-neutral-700 rounded-lg">
+                  <h4 className="text-sm font-medium text-neutral-300 mb-2">{t('return')}</h4>
+                  <p className="text-xl md:text-2xl font-bold" style={{ color: percentageGain >= 0 ? 'text-success-200' : '#ff4444' }}>
                     {percentageGain.toFixed(2)}%
                   </p>
                 </div>

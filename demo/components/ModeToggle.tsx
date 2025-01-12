@@ -19,7 +19,7 @@ const ModeToggle: React.FC<ModeToggleProps> = ({ mode, setMode }) => {
       variant="outline"
       size="sm"
       onClick={toggleMode}
-      className="bg-gray-700 text-gray-300 hover:bg-blue-600 hover:text-white"
+      className="bg-neutral-700 text-neutral-200 hover:bg-primary-300 hover:text-white"
     >
       {mode === 'stacker' ? t('stacker') : t('evangelist')}
     </Button>
