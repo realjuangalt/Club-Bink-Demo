@@ -7,48 +7,70 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          100: '#FFE4B5',
-          200: '#FFD700',
-          300: '#FFA500',
-          400: '#FF8C00',
-          500: '#8B4513',
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          100: '#98FB98',
-          200: '#90EE90',
-          300: '#32CD32',
-          400: '#228B22',
-          500: '#006400',
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        neutral: {
-          100: '#FFFFFF',
-          200: '#E8E8E8',
-          300: '#A9A9A9',
-          400: '#808080',
-          500: '#696969',
-          600: '#4D4D4D',
-          700: '#363636',
-          800: '#242424',
-          900: '#1A1A1A',
-          1000: '#000000',
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
-        error: {
-          100: '#FF4D4D',
-          200: '#FF0000',
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
-        warning: {
-          100: '#FFD700',
-          200: '#FFB700',
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
-        success: {
-          100: '#98FB98',
-          200: '#00FF00',
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
+  plugins: [require("tailwindcss-animate")],
 }
 

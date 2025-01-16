@@ -1,23 +1,23 @@
 'use client'
 
+import { useEffect } from 'react'
 import BitcoinDCACalculator from '../components/bitcoin-dca-calculator'
-import { LanguageProvider } from '../contexts/LanguageContext'
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [mode, setMode] = useState<'stacker' | 'evangelist'>('stacker');
+  const router = useRouter();
+
+  useEffect(() => {
+    // Prefetch the dashboard page
+    router.prefetch('/dashboard')
+  }, [router])
 
   return (
-    <LanguageProvider>
-      <main className="min-h-screen bg-[#1C1C1C]">
-        {mode === 'stacker' ? (
-          <BitcoinDCACalculator initialMode={mode} setMode={setMode} />
-        ) : (
-          // TODO: Implement Evangelist page
-          <div className="text-white p-4">Evangelist page coming soon!</div>
-        )}
-      </main>
-    </LanguageProvider>
+    <BitcoinDCACalculator initialMode="stacker" setMode={(mode) => {
+      if (mode === 'dashboard') {
+        router.push('/dashboard')
+      }
+    }} />
   )
 }
 
