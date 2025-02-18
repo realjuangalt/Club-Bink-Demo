@@ -2,6 +2,8 @@
 
 Club Bink is an open-source toolkit designed to empower Bitcoin Evangelists in helping friends and family stack and hold Bitcoin through regular peer-to-peer Dollar Cost Averaging (DCA) trades. This project aims to provide a secure, private, and user-friendly platform for growing local Bitcoin communities.
 
+Explore the latest demo of the project at https://www.bink.club/ 
+
 ## Features
 
 - Evangelist dashboard for managing Bitcoin trades and community growth
