@@ -1,9 +1,0 @@
-.card-transform {
-  transform: translateY(100px);
-}
-
-.card-visible {
-  transform: translateY(0);
-  opacity: 1 !important;
-}
-
