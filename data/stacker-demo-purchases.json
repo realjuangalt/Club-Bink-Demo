@@ -1,0 +1,63 @@
+[
+  {
+    "date": "2024-01-01",
+    "price": 42000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-01-08",
+    "price": 43500,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-01-15",
+    "price": 41000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-01-22",
+    "price": 44000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-01-29",
+    "price": 45500,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-02-05",
+    "price": 46000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-02-12",
+    "price": 47500,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-02-19",
+    "price": 48000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-02-26",
+    "price": 49500,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-03-04",
+    "price": 50000,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-03-11",
+    "price": 51500,
+    "purchaseAmount": 100
+  },
+  {
+    "date": "2024-03-18",
+    "price": 52000,
+    "purchaseAmount": 100
+  }
+]
+
