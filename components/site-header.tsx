@@ -1,54 +1,70 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
-import { usePathname } from "next/navigation"
-
-const getMenuItems = (currentPath: string) => {
-  const allItems = [
-    { href: "/", label: "Home" },
-    { href: "/stacker-landing", label: "Stacker Demo" },
-    { href: "/evangelist-dashboard", label: "Evangelist Demo" },
-    { href: "/evangelist-sign-up", label: "Create a Club" },
-  ]
-  return allItems.filter((item) => item.href !== currentPath)
-}
 
 export function SiteHeader() {
-  const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
-  const menuItems = getMenuItems(pathname)
+
+  // Define all main navigation routes
+  const routes = [
+    {
+      href: "/",
+      label: "Home",
+    },
+    {
+      href: "/about",
+      label: "About",
+    },
+    {
+      href: "/roadmap",
+      label: "Roadmap",
+    },
+    {
+      href: "/contact",
+      label: "Contact",
+    },
+  ]
+
+  // Filter out the current page from navigation
+  const filteredRoutes = routes.filter((route) => route.href !== pathname)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-[#121212]/95 backdrop-blur supports-[backdrop-filter]:bg-[#121212]/60">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2 pl-4">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bink_logo-QKKUxKCfntVUsNeqrqkGv1jipBV2er.webp"
-            alt="Club Bink Logo"
-            className="h-10 w-auto"
-          />
-          <span className="text-sm font-semibold text-gray-400">DEMO</span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bink_logo-s47zQMH4G75Ss1dvRBTfAWyWLJRxCI.svg"
+              alt="Bink Logo"
+              className="h-8 w-auto"
+            />
+            <span className="text-xl font-bold tracking-tight text-white">Club Bink</span>
+          </Link>
+        </div>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-4 pr-6">
-          {menuItems.map((item) => (
-            <Button
-              key={item.href}
-              variant={item.href === "/evangelist-sign-up" ? "default" : "ghost"}
-              className={item.href === "/evangelist-sign-up" ? "bg-[#FFA500] text-black hover:bg-[#FF9000]" : ""}
-              asChild
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex gap-6">
+          {filteredRoutes.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className="text-lg font-medium text-gray-300 transition-colors hover:text-white"
             >
-              <Link href={item.href}>{item.label}</Link>
-            </Button>
+              {route.label}
+            </Link>
           ))}
+          <Link href="/stacker-sign-up">
+            <Button variant="outline" className="border-[#FFA500] text-[#FFA500] hover:bg-[#FFA500] hover:text-black">
+              Sign Up
+            </Button>
+          </Link>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" className="md:hidden" size="icon">
@@ -56,18 +72,29 @@ export function SiteHeader() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[240px] bg-[#121212] text-white">
-            <nav className="flex flex-col space-y-4 mt-8">
-              {menuItems.map((item) => (
-                <Button
-                  key={item.href}
-                  variant={item.href === "/evangelist-sign-up" ? "default" : "ghost"}
-                  className={item.href === "/evangelist-sign-up" ? "bg-[#FFA500] text-black hover:bg-[#FF9000]" : ""}
-                  asChild
-                >
-                  <Link href={item.href}>{item.label}</Link>
-                </Button>
-              ))}
+          <SheetContent side="right" className="bg-gray-950 text-white">
+            <nav className="flex flex-col gap-4 mt-8">
+              {routes
+                .filter((route) => route.href !== pathname)
+                .map((route) => (
+                  <Link
+                    key={route.href}
+                    href={route.href}
+                    className="text-xl font-medium text-gray-300 transition-colors hover:text-white"
+                  >
+                    {route.label}
+                  </Link>
+                ))}
+              {pathname !== "/stacker-sign-up" && (
+                <Link href="/stacker-sign-up">
+                  <Button
+                    variant="outline"
+                    className="w-full mt-4 border-[#FFA500] text-[#FFA500] hover:bg-[#FFA500] hover:text-black"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              )}
             </nav>
           </SheetContent>
         </Sheet>

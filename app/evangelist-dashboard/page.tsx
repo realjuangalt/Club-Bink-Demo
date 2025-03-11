@@ -9,6 +9,8 @@ import { SiteHeader } from "@/components/site-header"
 import Link from "next/link"
 import { Copy, Users, TrendingUp, History } from "lucide-react"
 import { BinkPriceChart } from "@/components/BinkPriceChart"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 // Mock data for the orderbook
 const orderbookData = [
@@ -89,12 +91,16 @@ export default function EvangelistDashboard() {
               <CardTitle className="text-xl text-[#FFA500]">Grow Your Network</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white">
-                <Link href="/stacker-landing?ref=evangelist123">
-                  <Users className="mr-2 h-4 w-4" />
-                  Invite a Stacker
-                </Link>
-              </Button>
+              <Link
+                href="/stacker-landing?ref=evangelist123"
+                className={cn(
+                  buttonVariants({ variant: "custom" }),
+                  "w-full bg-green-600 hover:bg-green-700 text-white flex items-center justify-center",
+                )}
+              >
+                <Users className="mr-2 h-4 w-4" />
+                Invite a Stacker
+              </Link>
               <Button
                 onClick={() => copyToClipboard(`${window.location.origin}/evangelist-signup?ref=evangelist123`)}
                 className="w-full bg-[#FFA500] hover:bg-[#FF9000] text-black"
