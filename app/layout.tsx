@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Club Bink - Better Bitcoin P2P Trading",
   description: "An open source tool kit for local Bitcoin DCA markets completely peer to peer",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -26,6 +26,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'
